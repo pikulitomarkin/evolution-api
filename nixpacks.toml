@@ -12,4 +12,4 @@ cmds = [
 ]
 
 [start]
-cmd = ". ./Docker/scripts/deploy_database.sh && npm run start:prod"
+cmd = "bash -c 'source ./Docker/scripts/deploy_database.sh && npm run start:prod'"

@@ -6,7 +6,7 @@
   },
   "deploy": {
     "numReplicas": 1,
-    "startCommand": ". ./Docker/scripts/deploy_database.sh && npm run start:prod",
+    "startCommand": "bash -c 'source ./Docker/scripts/deploy_database.sh && npm run start:prod'",
     "healthcheckPath": "/",
     "healthcheckTimeout": 100,
     "restartPolicyType": "ON_FAILURE",
