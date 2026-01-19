@@ -1,0 +1,15 @@
+[phases.setup]
+nixPkgs = ["...", "ffmpeg", "wget", "curl", "bash", "openssl", "dos2unix"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = [
+  "chmod +x ./Docker/scripts/* && dos2unix ./Docker/scripts/*",
+  "./Docker/scripts/generate_database.sh",
+  "npm run build"
+]
+
+[start]
+cmd = ". ./Docker/scripts/deploy_database.sh && npm run start:prod"
