@@ -6,10 +6,14 @@ if [ "$DOCKER_ENV" != "true" ]; then
     export_env_vars
 fi
 
+# No Railway, usar DATABASE_URL como DATABASE_CONNECTION_URI
+if [ -n "$DATABASE_URL" ]; then
+    export DATABASE_CONNECTION_URI="$DATABASE_URL"
+fi
+
 if [[ "$DATABASE_PROVIDER" == "postgresql" || "$DATABASE_PROVIDER" == "mysql" || "$DATABASE_PROVIDER" == "psql_bouncer" ]]; then
-    export DATABASE_URL
     echo "Deploying migrations for $DATABASE_PROVIDER"
-    echo "Database URL: $DATABASE_URL"
+    echo "Database URL: $DATABASE_CONNECTION_URI"
     # rm -rf ./prisma/migrations
     # cp -r ./prisma/$DATABASE_PROVIDER-migrations ./prisma/migrations
     npm run db:deploy
